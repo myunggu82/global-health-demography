@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "lectures/week01_population_pyramid.html",
+    "href": "lectures/week01_population_pyramid.html",
+    "title": "Week 1 Population Pyramid",
+    "section": "",
+    "text": "library(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.5.3\n\n\nWarning: package 'ggplot2' was built under R version 4.5.3\n\n\nWarning: package 'forcats' was built under R version 4.5.3\n\n\nWarning: package 'lubridate' was built under R version 4.5.3\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.3     ✔ tibble    3.3.0\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(wpp2024)\n\nLoading required package: data.table\n\n\nWarning: package 'data.table' was built under R version 4.5.3\n\n\n\nAttaching package: 'data.table'\n\nThe following objects are masked from 'package:lubridate':\n\n    hour, isoweek, isoyear, mday, minute, month, quarter, second, wday,\n    week, yday, year\n\nThe following objects are masked from 'package:dplyr':\n\n    between, first, last\n\nThe following object is masked from 'package:purrr':\n\n    transpose"
+  },
+  {
+    "objectID": "lectures/week01_population_pyramid.html#load-packages",
+    "href": "lectures/week01_population_pyramid.html#load-packages",
+    "title": "Week 1 Population Pyramid",
+    "section": "",
+    "text": "library(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.5.3\n\n\nWarning: package 'ggplot2' was built under R version 4.5.3\n\n\nWarning: package 'forcats' was built under R version 4.5.3\n\n\nWarning: package 'lubridate' was built under R version 4.5.3\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.3     ✔ tibble    3.3.0\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(wpp2024)\n\nLoading required package: data.table\n\n\nWarning: package 'data.table' was built under R version 4.5.3\n\n\n\nAttaching package: 'data.table'\n\nThe following objects are masked from 'package:lubridate':\n\n    hour, isoweek, isoyear, mday, minute, month, quarter, second, wday,\n    week, yday, year\n\nThe following objects are masked from 'package:dplyr':\n\n    between, first, last\n\nThe following object is masked from 'package:purrr':\n\n    transpose"
+  },
+  {
+    "objectID": "lectures/week01_population_pyramid.html#load-wpp-2024-data",
+    "href": "lectures/week01_population_pyramid.html#load-wpp-2024-data",
+    "title": "Week 1 Population Pyramid",
+    "section": "2. Load WPP 2024 data",
+    "text": "2. Load WPP 2024 data\n\ndata(popAge5dt)\n\ncountry_name &lt;- \"Republic of Korea\"\ntarget_year &lt;- 2020"
+  },
+  {
+    "objectID": "lectures/week01_population_pyramid.html#create-population-pyramid-data",
+    "href": "lectures/week01_population_pyramid.html#create-population-pyramid-data",
+    "title": "Week 1 Population Pyramid",
+    "section": "3. Create population pyramid data",
+    "text": "3. Create population pyramid data\n\npyramid_data &lt;- popAge5dt %&gt;%\n  filter(name == country_name, year == target_year) %&gt;%\n  select(year, age, popM, popF) %&gt;%\n  pivot_longer(\n    cols = c(popM, popF),\n    names_to = \"sex\",\n    values_to = \"population\"\n  ) %&gt;%\n  mutate(\n    sex = case_when(\n      sex == \"popM\" ~ \"남\",\n      sex == \"popF\" ~ \"여\"\n    ),\n    age = factor(age, levels = unique(age)),\n    plot_pop = ifelse(sex == \"남\", -population, population)\n  )\n\ntotal_pop &lt;- sum(pyramid_data$population) * 1000"
+  },
+  {
+    "objectID": "lectures/week01_population_pyramid.html#population-pyramid",
+    "href": "lectures/week01_population_pyramid.html#population-pyramid",
+    "title": "Week 1 Population Pyramid",
+    "section": "4. Population pyramid",
+    "text": "4. Population pyramid\n\nggplot(\n  pyramid_data,\n  aes(x = age, y = plot_pop, fill = sex)\n) +\n  geom_col(width = 0.9) +\n  coord_flip() +\n  scale_y_continuous(\n    labels = function(x) format(abs(x), big.mark = \",\")\n  ) +\n  scale_fill_manual(\n    name = \"성별\",\n    values = c(\n      \"남\" = \"#00AFC4\",\n      \"여\" = \"#006D6F\"\n    )\n  ) +\n  labs(\n    title = \"대한민국\",\n    subtitle = paste0(\n      \"총인구: \",\n      format(round(total_pop), big.mark = \",\"),\n      \"명 (\",\n      target_year,\n      \"년)\"\n    ),\n    x = NULL,\n    y = \"인구수(천명)\"\n  ) +\n  theme_bw(base_size = 12) +\n  theme(\n    plot.title = element_text(hjust = 0.5, face = \"bold\"),\n    plot.subtitle = element_text(hjust = 0.5, face = \"bold\"),\n    legend.title = element_text(face = \"bold\"),\n    legend.position = \"right\",\n    panel.grid.minor = element_blank()\n  )"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Global Health and Demography",
+    "section": "",
+    "text": "This course introduces demographic methods and global health data analysis using R."
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Global Health and Demography",
+    "section": "",
+    "text": "This course introduces demographic methods and global health data analysis using R."
+  },
+  {
+    "objectID": "index.html#lecture-materials",
+    "href": "index.html#lecture-materials",
+    "title": "Global Health and Demography",
+    "section": "Lecture materials",
+    "text": "Lecture materials"
+  }
+]
