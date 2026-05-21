@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "International Health and Demography"
+  title: "Global Health and Demography"
   navbar:
     left:
       - href: index.qmd
