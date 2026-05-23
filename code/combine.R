@@ -1,7 +1,4 @@
-
 # pyrimid for single year -------------------------------------------------
-
-
 
 library(tidyverse)
 library(wpp2024)
@@ -58,8 +55,9 @@ ggplot(
     x = NULL,
     y = "인구수(천명)"
   ) +
-  theme_bw(base_size = 12) +
+  theme_bw(base_size = 12, base_family = "AppleGothic") +
   theme(
+    text = element_text(family = "AppleGothic"),
     plot.title = element_text(hjust = 0.5, face = "bold"),
     plot.subtitle = element_text(hjust = 0.5, face = "bold"),
     legend.title = element_text(face = "bold"),
@@ -68,14 +66,12 @@ ggplot(
   )
 
 
-
 # historical pyramid ------------------------------------------------------
 
 library(tidyverse)
 library(wpp2024)
 library(gganimate)
 library(gifski)
-data(popAge5dt)
 data(package = "wpp2024")
 
 
@@ -147,16 +143,18 @@ p <- ggplot(
     x = NULL,
     y = "인구수(천명)"
   ) +
-  theme_bw(base_size = 12) +
+  theme_bw(base_size = 12, base_family = "AppleGothic") +
   theme(
+    text = element_text(family = "AppleGothic"),
     plot.title = element_text(hjust = 0.5, face = "bold"),
     plot.subtitle = element_text(hjust = 0.5, face = "bold"),
     legend.title = element_text(face = "bold"),
-    legend.position = "right"
+    legend.position = "right",
+    panel.grid.minor = element_blank()
   ) +
   transition_manual(frame_label)
 
-animate(
+anim <- animate(
   p,
   nframes = 120,
   fps = 30,
@@ -166,7 +164,7 @@ animate(
   renderer = gifski_renderer("figure/korea_population_pyramid.gif")
 )
 
-
+anim
 
 # projection --------------------------------------------------------------
 
@@ -237,15 +235,18 @@ p <- ggplot(pyramid_data, aes(x = age, y = plot_pop, fill = sex)) +
     x = NULL,
     y = "인구수(천명)"
   ) +
-  theme_bw(base_size = 12) +
+  theme_bw(base_size = 12, base_family = "AppleGothic") +
   theme(
+    text = element_text(family = "AppleGothic"),
     plot.title = element_text(hjust = 0.5, face = "bold"),
     plot.subtitle = element_text(hjust = 0.5, face = "bold"),
     legend.title = element_text(face = "bold"),
-    legend.position = "right"
+    legend.position = "right",
+    panel.grid.minor = element_blank()
   ) +
   transition_manual(frame_label)
-getwd()
+
+
 animate(
   p,
   nframes = 180,
@@ -254,7 +255,7 @@ animate(
   height = 650,
   end_pause = 40,
   renderer = gifski_renderer(
-    "figure/korea_population_pyramid_2025_2100.gif"
+    "figure/korea_population_pyramid_2025_2100_2.gif"
   )
 )
 
