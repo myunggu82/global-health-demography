@@ -7,31 +7,31 @@ editor: visual
 
 ## I. Course overview
 
--   Course objectives
+1.  Course objectives
 
     By the end of this course, students will be able to:
 
- 1) Understand how demographic change shapes global health challenges and opportunities
+    1\) Understand how demographic change shapes global health challenges and opportunities
 
-2) Analyze population and health data using **R** and **GeoDa**
+    2\) Analyze population and health data using **R** and **GeoDa**
 
-3) Explain and demonstrate the health consequences of demographic transitions
+    3\) Explain and demonstrate the health consequences of demographic transitions
 
--   Course Schedule
+2.  Course Schedule
 
-1\) We**ek 1 (May 26):** Introduction to Global Health and Demography
+    1\) We**e**k 1 **(May 26):** Introduction to Global Health and Demography
 
-2\) Week 2 (**June 9):** Contemporary Fertility and Mortality Transition
+    2\) Week 2 (**June 9):** Contemporary Fertility and Mortality Transition
 
-3\) Week 3 (**June 16):** Mobility, Migration, and Health
+    3\) Week 3 (**June 16):** Mobility, Migration, and Health
 
-4\) Week 4 (**June 23):** Spatial Demography and Health
+    4\) Week 4 (**June 23):** Spatial Demography and Health
 
 ## II. Lecture materials
 
 -   Lecture slides will be shared via email before each class. Please check your email regularly.
 
--   Course materials and practical tutorials are available at:\
+-   Course materials and practical tutorials are available at:
 
     [**https://myunggu82.github.io/global-health-demography/**](https://myunggu82.github.io/global-health-demography/)
 
@@ -49,7 +49,7 @@ editor: visual
 
     -   제출기한: 마지막 수업 당일 까지 (최종 제출 기한은 ETL 통해 일괄 공지 예정)
 
-## IV. Reading materials (Option) 
+## IV. Reading materials (Option)
 
 -   팩트풀니스 (한스로슬링, 2018)
 
@@ -59,7 +59,7 @@ editor: visual
 
 -   How Population Change Will Transform Our World (Sarah Harper, 2016)
 
--   Why Demography Matters ( Danny Dorling, Stuart Gietel-Basten ,2018)
+-   Why Demography Matters (Danny Dorling, Stuart Gietel-Basten ,2018)
 
 ## V. Contacts
 
