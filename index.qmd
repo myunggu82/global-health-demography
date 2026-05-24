@@ -7,7 +7,7 @@ editor: visual
 
 ## I. Course overview
 
-1.  Course objectives
+1.  **Course objectives**
 
     By the end of this course, students will be able to:
 
@@ -17,9 +17,9 @@ editor: visual
 
     3\) Explain and demonstrate the health consequences of demographic transitions
 
-2.  Course Schedule
+2.  **Course Schedule**
 
-    1\) We**e**k 1 **(May 26):** Introduction to Global Health and Demography
+    1\) Week 1 **(May 26):** Introduction to Global Health and Demography
 
     2\) Week 2 (**June 9):** Contemporary Fertility and Mortality Transition
 
@@ -29,7 +29,7 @@ editor: visual
 
 ## II. Lecture materials
 
--   Lecture slides will be shared via email before each class. Please check your email regularly.
+-   Lecture slides will be shared via email before each class. Please check your email.
 
 -   Course materials and practical tutorials are available at:
 
@@ -43,7 +43,7 @@ editor: visual
 
 -   최종성찰보고서
 
-    -   학생 작성 시기:과목 종료 후 (마지막 수업 후)
+    -   학생 작성 시기: 과목 종료 후 (마지막 수업 후)
 
     -   양식: A4 한장 이내
 
