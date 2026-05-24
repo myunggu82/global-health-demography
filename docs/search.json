@@ -39,20 +39,41 @@
     "href": "index.html",
     "title": "Global Health and Demography",
     "section": "",
-    "text": "This course introduces demographic methods and global health data analysis using R."
+    "text": "Course objectives\nBy the end of this course, students will be able to:\n\n\nUnderstand how demographic change shapes global health challenges and opportunities\nAnalyze population and health data using R and GeoDa\nExplain and demonstrate the health consequences of demographic transitions\n\n\nCourse Schedule\n\n1) Week 1 (May 26): Introduction to Global Health and Demography\n2) Week 2 (June 9): Contemporary Fertility and Mortality Transition\n3) Week 3 (June 16): Mobility, Migration, and Health\n4) Week 4 (June 23): Spatial Demography and Health"
   },
   {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
+    "objectID": "index.html#i.-course-overview",
+    "href": "index.html#i.-course-overview",
     "title": "Global Health and Demography",
     "section": "",
-    "text": "This course introduces demographic methods and global health data analysis using R."
+    "text": "Course objectives\nBy the end of this course, students will be able to:\n\n\nUnderstand how demographic change shapes global health challenges and opportunities\nAnalyze population and health data using R and GeoDa\nExplain and demonstrate the health consequences of demographic transitions\n\n\nCourse Schedule\n\n1) Week 1 (May 26): Introduction to Global Health and Demography\n2) Week 2 (June 9): Contemporary Fertility and Mortality Transition\n3) Week 3 (June 16): Mobility, Migration, and Health\n4) Week 4 (June 23): Spatial Demography and Health"
   },
   {
-    "objectID": "index.html#lecture-materials",
-    "href": "index.html#lecture-materials",
+    "objectID": "index.html#ii.-lecture-materials",
+    "href": "index.html#ii.-lecture-materials",
     "title": "Global Health and Demography",
-    "section": "Lecture materials",
-    "text": "Lecture materials"
+    "section": "II. Lecture materials",
+    "text": "II. Lecture materials\n\nLecture slides will be shared via email before each class. Please check your email regularly.\nCourse materials and practical tutorials are available at:\n\nhttps://myunggu82.github.io/global-health-demography/"
+  },
+  {
+    "objectID": "index.html#iii.-evaluation",
+    "href": "index.html#iii.-evaluation",
+    "title": "Global Health and Demography",
+    "section": "III. Evaluation",
+    "text": "III. Evaluation\n\n평가: P/F (출석 30%, 평가 70%)\n출석: 수업 일수 1/2 (2번) 이상 결석한 경우, 사유와 상관없이 F학점 부여 (서울의대 선택교과 출결 원칙 2020. 실행)\n최종성찰보고서\n\n학생 작성 시기:과목 종료 후 (마지막 수업 후)\n양식: A4 한장 이내\n제출기한: 마지막 수업 당일 까지 (최종 제출 기한은 ETL 통해 일괄 공지 예정)"
+  },
+  {
+    "objectID": "index.html#iv.-reading-materials-option",
+    "href": "index.html#iv.-reading-materials-option",
+    "title": "Global Health and Demography",
+    "section": "IV. Reading materials (Option)",
+    "text": "IV. Reading materials (Option)\n\n팩트풀니스 (한스로슬링, 2018)\n죽음의 역사 (앤드류 도이그, 2023)\n출산, 그 놀라운 역사 (티나 캐시디, 2007)\nHow Population Change Will Transform Our World (Sarah Harper, 2016)\nWhy Demography Matters ( Danny Dorling, Stuart Gietel-Basten ,2018)"
+  },
+  {
+    "objectID": "index.html#v.-contacts",
+    "href": "index.html#v.-contacts",
+    "title": "Global Health and Demography",
+    "section": "V. Contacts",
+    "text": "V. Contacts\n\nProf. Young Su Park (youngsupark@snu.ac.kr)\nDr. Myunggu Jung (myunggu82@snu.ac.kr)"
   }
 ]
