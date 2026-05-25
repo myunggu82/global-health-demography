@@ -284,6 +284,7 @@ p_historical <- ggplot(
 Step 4. Render animation
 
 ```{r}
+#| eval: false
 #| warning: false
 #| message: false
 
@@ -298,7 +299,10 @@ animate(
     "../figure/korea_population_pyramid.gif"
   )
 )
+
 ```
+
+![](../figure/korea_population_pyramid.gif)
 
 ### 6. Future population pyramid animation: 2025–2100
 
@@ -437,6 +441,7 @@ p_projection <- ggplot(
 Step 4. Render animation
 
 ```{r}
+#| eval: false
 #| warning: false
 #| message: false
 
@@ -451,4 +456,7 @@ animate(
     "../figure/korea_population_pyramid_2025_2100.gif"
   )
 )
+
 ```
+
+![](../figure/korea_population_pyramid_2025_2100.gif)
