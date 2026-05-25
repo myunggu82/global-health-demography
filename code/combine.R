@@ -4,6 +4,9 @@ library(tidyverse)
 library(wpp2024)
 
 data(popAge5dt)
+head(popAge5dt)
+unique(popAge5dt$name)
+data(package = "wpp2024")
 
 country_name <- "Republic of Korea"
 target_year <- 2020

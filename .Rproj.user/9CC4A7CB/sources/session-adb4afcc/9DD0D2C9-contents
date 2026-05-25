@@ -1,8 +1,0 @@
-getwd()
-
-
-dir.create("lectures", showWarnings = FALSE)
-dir.create("figure", showWarnings = FALSE)
-dir.create("docs", showWarnings = FALSE)
-
-list.files("docs")
