@@ -1,6 +1,6 @@
 ---
 title: "Global Health and Demography"
-author: "MJ"
+author: "Myunggu Jung"
 format: html
 editor: visual
 ---
@@ -19,13 +19,13 @@ editor: visual
 
 2.  **Course Schedule**
 
-    1\) Week 1 **(May 26):** Introduction to Global Health and Demography
+    1\) Week 1 (May 26): Demographic changes and Global Health
 
-    2\) Week 2 (**June 9):** Contemporary Fertility and Mortality Transition
+    2\) Week 2 (June 9): Contemporary Fertility and Mortality Transition
 
-    3\) Week 3 (**June 16):** Mobility, Migration, and Health
+    3\) Week 3 (June 16): Mobility, Migration, and Health
 
-    4\) Week 4 (**June 23):** Spatial Demography and Health
+    4\) Week 4 (June 23): Spatial Demography and Health
 
 ## II. Lecture materials
 
