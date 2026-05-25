@@ -7,8 +7,7 @@ editor: visual
 
 ## Part 1: Lecture Slide
 
-You can download the lecture slide here:\
-\[📥 Download Week 1 Lecture Slide (PDF)\](https://myunggu82.github.io/global-health-demography/slides/week1_demographic_change.pdf)
+You can download the lecture slide here: [Week1_Lecture_Slide](https://myunggu82.github.io/global-health-demography/slides/week1_demographic_change.pdf)\
 
 ## Part 2: Practice: Population Pyramid
 
