@@ -8,7 +8,7 @@ editor: visual
 ## Part 1: Lecture Slide
 
 You can download the lecture slide here:\
-\[📥 Download Week 1 Lecture Slide (PDF)\](/global-health-demography/slides/week1_demographic_change.pdf)
+\[📥 Download Week 1 Lecture Slide (PDF)\](https://myunggu82.github.io/global-health-demography/slides/week1_demographic_change.pdf)
 
 ## Part 2: Practice: Population Pyramid
 
@@ -75,7 +75,7 @@ country_name <- "Republic of Korea"
 target_year <- 2020
 ```
 
-The original dataset has separate columns for male and female populations. \
+The original dataset has separate columns for male and female populations.\
 We reshape the data into a long format and create a new variable, \`plot_pop\`, so that male population values are shown on the left side of the pyramid.
 
 ```{r}
@@ -104,7 +104,7 @@ head(pyramid_data)
 total_pop <- sum(pyramid_data$population) * 1000
 ```
 
-The total population is calculated by adding male and female populations across all age groups. \
+The total population is calculated by adding male and female populations across all age groups.\
 Because WPP population values are given in thousands, we multiply the sum by 1,000.
 
 ```{r}
@@ -473,7 +473,7 @@ animate(
 4.  **고령화**: 출산 감소와 기대수명 증가가 동시에 진행되면서 빠른 속도로 고령화가 진행 중임
 5.  **미래 인구구조와 건강**: 인구 감소와 초고령화가 심화되며, 노인의 건강과 돌봄 문제가 중요해질 것임
 
-### 8. 실습 
+### 8. 실습
 
 1.  미국 / 2. 영국 / 3. 베트남 / 4. 키르기즈공화국 / 5. 에티오피아
 2.  2020년도의 인구피라미드 / 1950-20의 인구피라미드 변화 / 2025-인구피라미드 변화
