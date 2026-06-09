@@ -1,0 +1,302 @@
+---
+title: "Week 2. Comtemporary Mortality and Fertility Transition"
+author: "Myunggu Jung"
+format: html
+editor: visual
+---
+
+## Part 1: Lecture Slide
+
+You can download the lecture slide here: [Week2_Lecture_Slide](https://github.com/myunggu82/global-health-demography/blob/main/lectures/week_02_0609.pdf)\
+And recap exercise: [Week2_Exercise](https://github.com/myunggu82/global-health-demography/blob/main/lectures/exercise.pptx)
+
+## Part 2: Practice: Mortality and Fertility
+
+### 1. Objectives
+
+By the end of this lecture, students will be able to:\
+\
+1. Caculate and compare Crude death rate and Age-standardized mortality rates.\
+2. Understand changes in survival curve.\
+3. Calculate and compare changes in Age-specific fertility rates
+
+### 2. Install and Load packages
+
+If you are running this code for the first time, install the required packages.
+
+```{r}
+#| eval: false
+
+install.packages("DemoTools")
+  
+
+```
+
+We now load the required packages for data wrangling, visualization, and animation.
+
+```{r}
+#| warning: false
+#| message: false
+library(dplyr)
+library(ggplot2)
+library(DemoTools)
+library(wpp2024)
+
+```
+
+### 3. Load WPP 2024 population and mortality data
+
+The \`wpp2024\` package contains population, fertility, mortality, and projection datasets from the UN World Population Prospects 2024.
+
+```{r}
+#| warning: false
+#| message: false
+data(mx1dt)
+data(mx5dt)
+data(popAge1dt)
+```
+
+### 4.  Age-specific mortality and population (Japan vs Uganda, 2018)
+
+This section compares mortality between Japan and Uganda using age-specific mortality rates and population data.
+
+```{r}
+#| warning: false
+#| message: false
+jap_mx <- mx1dt %>%
+  filter(name == "Japan", year == 2018) %>%
+  select(age, mxB)
+
+uga_mx <- mx1dt %>%
+  filter(name == "Uganda", year == 2018) %>%
+  select(age, mxB)
+
+jap_pop <- popAge1dt %>%
+  filter(name == "Japan", year == 2018) %>%
+  select(age, pop)
+
+uga_pop <- popAge1dt %>%
+  filter(name == "Uganda", year == 2018) %>%
+  select(age, pop)
+```
+
+we first calculate 'Crude Death Rate'.
+
+```{r}
+#| warning: false
+#| message: false
+
+jap_cdr <- jap_pop %>%
+  left_join(jap_mx, by = "age") %>%
+  summarise(CDR = sum(pop * mxB) / sum(pop) * 1000) %>%
+  pull(CDR)
+
+uga_cdr <- uga_pop %>%
+  left_join(uga_mx, by = "age") %>%
+  summarise(CDR = sum(pop * mxB) / sum(pop) * 1000) %>%
+  pull(CDR)
+
+```
+
+The crude death rate shows the number of deaths per 1,000 population without adjusting for age structure.
+
+### 5.  Direct age standardization
+
+```{r}
+#| warning: false
+#| message: false
+std_pop <- jap_pop %>%
+  rename(pop_jap = pop) %>%
+  left_join(uga_pop %>% rename(pop_uga = pop), by = "age") %>%
+  mutate(std_pop = (pop_jap + pop_uga) / 2) %>%
+  select(age, std_pop)
+
+jap_asmr <- std_pop %>%
+  left_join(jap_mx, by = "age") %>%
+  summarise(ASMR = sum(std_pop * mxB) / sum(std_pop) * 1000) %>%
+  pull(ASMR)
+
+uga_asmr <- std_pop %>%
+  left_join(uga_mx, by = "age") %>%
+  summarise(ASMR = sum(std_pop * mxB) / sum(std_pop) * 1000) %>%
+  pull(ASMR)
+
+```
+
+Age-standardized mortality removes the effect of different population age structures.
+
+The below table shows how crude and age-standardized mortality rates can lead to different interpretations.
+
+```{r}
+#| warning: false
+#| message: false
+mortality_result <- tibble(
+  Country = c("Japan", "Uganda"),
+  `Crude Death Rate` = c(jap_cdr, uga_cdr),
+  `Age-standardized Mortality Rate` = c(jap_asmr, uga_asmr)
+)
+
+mortality_result
+
+```
+
+### 6.  Survivorship curves: Republic of Korea, 1953 vs 2018
+
+We first need to create time tables and the use lx to create survivoership curves. Survivorship curves show how many people remain alive at each age out of 100,000 births.
+
+```{r}
+#| warning: false
+#| message: false
+
+kor_mx_1953 <- mx5dt %>%
+  filter(name == "Republic of Korea", year == 1953) %>%
+  transmute(
+    Age = as.numeric(gsub("100\\+", "100", age)),
+    nMx = mxB
+  ) %>%
+  arrange(Age)
+
+kor_mx_2018 <- mx5dt %>%
+  filter(name == "Republic of Korea", year == 2018) %>%
+  transmute(
+    Age = as.numeric(gsub("100\\+", "100", age)),
+    nMx = mxB
+  ) %>%
+  arrange(Age)
+
+lt_kor_1953 <- lt_abridged(
+  nMx = kor_mx_1953$nMx,
+  Age = kor_mx_1953$Age,
+  radix = 100000
+) %>%
+  mutate(year = "1953")
+
+lt_kor_2018 <- lt_abridged(
+  nMx = kor_mx_2018$nMx,
+  Age = kor_mx_2018$Age,
+  radix = 100000
+) %>%
+  mutate(year = "2018")
+
+lt_kor_both <- bind_rows(lt_kor_1953, lt_kor_2018)
+```
+
+We now plot survivorship curves
+
+```{r}
+ggplot(
+  lt_kor_both,
+  aes(x = Age, y = lx, color = year, linetype = year)
+) +
+  geom_line(linewidth = 1.3) +
+  scale_color_manual(
+    values = c("1953" = "red", "2018" = "blue")
+  ) +
+  labs(
+    title = "Survivorship Curves, Republic of Korea",
+    subtitle = "Comparison between 1953 and 2018",
+    x = "Age",
+    y = "Survivors out of 100,000 births",
+    color = "Year",
+    linetype = "Year"
+  ) +
+  theme_classic()
+```
+
+### 6.  Fertility Transition in Korea
+
+This section examines changes in age-specific fertility rates in the Republic of Korea.
+The results show how fertility shifted from a broad and high-fertility pattern to a delayed and low-fertility pattern.
+
+```{r}
+#| warning: false
+#| message: false
+data(percentASFR5dt) 
+data(tfr5dt)
+
+kor_asfr <- percentASFR5dt %>%
+  filter(
+    name == "Republic of Korea",
+    year %in% c(1953, 1973, 1993, 2013, 2018)
+  ) %>%
+  left_join(
+    tfr5dt %>%
+      select(name, year, tfr),
+    by = c("name", "year")
+  ) %>%
+  mutate(
+    ASFR = tfr * pasfr / 500
+  )
+
+kor_asfr
+```
+
+The percentage distribution of fertility by age is converted into age-specific fertility rates using the total fertility rate.
+
+```{r}
+kor_asfr %>%
+  group_by(year) %>%
+  summarise(
+    TFR_check = 5 * sum(ASFR),
+    TFR_original = first(tfr)
+  )
+
+```
+
+This check confirms that the calculated age-specific fertility rates reproduce the original total fertility rate.
+
+The percentage distribution of fertility by age is converted into age-specific fertility rates using the total fertility rate.
+
+```{r}
+kor_asfr_table <- kor_asfr %>%
+  mutate(
+    ASFR = round(ASFR * 1000, 1)
+  ) %>%
+  select(year, age, ASFR) %>%
+  pivot_wider(
+    names_from = age,
+    values_from = ASFR
+  ) %>%
+  arrange(year)
+
+kor_asfr_table
+
+```
+
+The table shows age-specific fertility rates per 1,000 women.
+
+fertility rate.
+
+```{r}
+ggplot(
+  kor_asfr,
+  aes(
+    x = age,
+    y = ASFR * 1000,
+    color = factor(year),
+    group = year
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 2.5) +
+  scale_color_viridis_d(
+    option = "viridis",
+    begin = 0.1,
+    end = 0.9
+  ) +
+  labs(
+    title = "Age-Specific Fertility Rates, Republic of Korea",
+    subtitle = "1953, 1973, 1993, 2013, and 2018",
+    x = "Age",
+    y = "Births per 1,000 women",
+    color = "Year"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = "bottom"
+  )
+
+```
+
+The fertility schedule became much lower and shifted toward older ages over time.\
+This reflects Korea's rapid fertility transition and delayed childbearing.

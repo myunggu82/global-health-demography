@@ -9,10 +9,6 @@ website:
       - href: index.qmd
         text: Home
       - href: lectures/week01_population_pyramid.qmd
-        text: Week 1
-
-format:
-  html:
-    theme: cosmo
-    toc: true
-    code-fold: false
+        text: Week 1. Population Pyramid
+      - href: lectures/week02_mortality_fertility.qmd
+        text: Week 2. Mortality and Fertility
