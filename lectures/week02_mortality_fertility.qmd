@@ -41,6 +41,7 @@ library(dplyr)
 library(ggplot2)
 library(DemoTools)
 library(wpp2024)
+library(tidyr)
 
 ```
 
@@ -253,9 +254,9 @@ kor_asfr_table <- kor_asfr %>%
     ASFR = round(ASFR * 1000, 1)
   ) %>%
   select(year, age, ASFR) %>%
-  pivot_wider(
-    names_from = age,
-    values_from = ASFR
+  tidyr::pivot_wider(
+  names_from = age,
+  values_from = ASFR
   ) %>%
   arrange(year)
 
