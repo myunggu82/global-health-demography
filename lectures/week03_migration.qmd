@@ -7,16 +7,17 @@ editor: visual
 
 ## Part 1: Lecture Slide
 
-You can download the lecture slide here (Migration): [Week3_Migration](https://github.com/myunggu82/global-health-demography/blob/main/slides/week%203_migration.pdf)\
-ou can download the lecture slide here (Mobility): [Week3_Mobility](https://github.com/myunggu82/global-health-demography/blob/main/slides/week%203_mobility.pdf)
+You can download the lecture slide here (Migration): [Week3_Migration](https://github.com/myunggu82/global-health-demography/blob/main/slides/week%203_migration.pdf), [Week3_Mobility](https://github.com/myunggu82/global-health-demography/blob/main/slides/week%203_mobility.pdf)
 
-## Part 2: Practic
+## Part 2: Practice
 
 ### 1. Objectives
 
 By the end of this lecture, students will be able to:\
-\
-1. Distinguish different types and measures of migration. 2. Explain major theories of migration and population mobility. 3. Understand the relationships between migration, health, and fertility. 4. Interpret and visualize migration patterns using demographic data.
+
+1\. Distinguish different types and measures of migration. \
+2. Understand the relationships between migration, health, and fertility. \
+3. Interpret and visualize migration patterns using demographic data.
 
 ### 2. Install and Load packages
 

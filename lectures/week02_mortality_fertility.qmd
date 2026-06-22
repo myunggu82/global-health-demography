@@ -16,7 +16,7 @@ And recap exercise: [Week2_Exercise](https://github.com/myunggu82/global-health-
 
 By the end of this lecture, students will be able to:\
 \
-1. Caculate and compare Crude death rate and Age-standardized mortality rates.\
+1. Calculate and compare Crude death rate and Age-standardized mortality rates.\
 2. Understand changes in survival curve.\
 3. Calculate and compare changes in Age-specific fertility rates
 
@@ -27,9 +27,9 @@ If you are running this code for the first time, install the required packages.
 ```{r}
 #| eval: false
 
-install.packages("DemoTools")
-  
+install.packages("remotes")
 
+remotes::install_github("timriffe/DemoTools")
 ```
 
 We now load the required packages for data wrangling, visualization, and animation.
