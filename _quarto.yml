@@ -14,3 +14,5 @@ website:
         text: "Week 2"
       - href: lectures/week03_migration.qmd
         text: "Week 3"
+      - href: lectures/week04_spatial_demography.qmd
+        text: "Week 4"

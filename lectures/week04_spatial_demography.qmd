@@ -1,0 +1,289 @@
+---
+title: "Week 4. Spatial Demography"
+author: "Myunggu Jung"
+format: html
+editor: visual
+---
+
+## Mapping with \`tmap\`
+
+In this practice, we learn how to create thematic maps using the \`tmap\` package in R. \
+The package is introduced from the official tmap website: \<https://r-tmap.github.io/tmap/\>.\
+\
+More examples, tutorials, and practice exercises are available on the website.
+
+### 1. Install and Load packages
+
+If you are running this code for the first time, install the required packages.
+
+```{r}
+#| eval: false
+
+install.packages("tmap")
+  
+```
+
+We now open the tmap library.
+
+```{r}
+#| warning: false
+#| message: false
+library(tmap)
+```
+
+### 2. Set tmap mode
+
+The \`tmap\` package has two main modes.\
+1) \`plot\` mode creates static maps for slides, reports, and academic papers.
+
+2\) \`view\` mode creates interactive maps using leaflet.
+
+```{r}
+#| warning: false
+#| message: false
+
+tmap_mode("plot")
+tmap_mode("view")
+
+```
+
+### 3. Load example spatial data
+
+World is an example sf object included in the tmap package.
+
+The dataset includes country boundaries and several demographic, health, and socioeconomic indicators.
+
+```{r}
+#| warning: false
+#| message: false
+
+data(World, package = "tmap")
+
+# Check available variables
+names(World)
+```
+
+### 4. Basic map
+
+A basic map colours geographic areas according to the value of a variable.
+
+```{r}
+#| warning: false
+#| message: false
+tm_shape(World) +
+  tm_polygons(fill = "HPI")
+
+# Here, countries are coloured by the Happy Planet Index.
+```
+
+### 5. Basic map with colour palette
+
+We can map life expectancy using a continuous colour scale.
+
+```{r}
+#| warning: false
+#| message: false
+
+tm_shape(World) +
+  tm_polygons(
+    fill = "life_exp",
+    fill.scale = tm_scale_continuous(values = "viridis"),
+    fill.legend = tm_legend(
+      title = "Life Expectancy",
+      orientation = "landscape",
+      frame = FALSE
+    )
+  )
+
+# Common palettes:
+# "YlGn", "YlGnBu", "GnBu", "BuGn", "PuBu", "PuBuGn", "BuPu"
+# "Blues", "Greens", "Reds", "Oranges", "Purples"
+# "RdYlBu", "RdYlGn", "RdBu", "Spectral"
+# "viridis", "plasma", "magma", "inferno", "cividis"
+```
+
+### 6. Map with fixed class intervals
+
+Here, life expectancy is divided into fixed groups: 0–60, 60–70, 70–80, and 80–90 years
+
+```{r}
+#| warning: false
+#| message: false
+
+le <- tm_shape(World) +
+  tm_polygons(
+    fill = "life_exp",
+    fill.scale = tm_scale_intervals(
+      style = "fixed",
+      breaks = c(0, 60, 70, 80, 90),
+      values = "brewer.yl_gn_bu"
+    ),
+    fill.legend = tm_legend(
+      title = "Life Expectancy",
+      orientation = "landscape",
+      frame = FALSE
+    )
+  )
+
+le
+```
+
+Fixed intervals make the map easier to interpret when the categories have substantive meaning.
+
+### 7. Add transparency
+
+Transparency can be controlled using \`fill_alpha\`.
+
+\`fill_alpha = 1.0\` is fully opaque, while \`fill_alpha = 0.0\` is fully transparent.
+
+```{r}
+#| warning: false
+#| message: false
+le_a <- tm_shape(World) +
+  tm_polygons(
+    fill = "life_exp",
+    fill_alpha = 0.5,
+    fill.scale = tm_scale_intervals(
+      breaks = c(0, 60, 70, 80, 90),
+      values = "brewer.yl_gn_bu"
+    ),
+    fill.legend = tm_legend(
+      title = "Life Expectancy"
+    )
+  )
+
+le_a
+```
+
+### 8. Interactive map
+
+We can switch to interactive mode. Interactive maps are useful for exploratory spatial analysis.\
+We return to static plot mode for the rest of the lecture.
+
+```{r}
+#| warning: false
+#| message: false
+
+tmap_mode("view")
+
+le_a
+
+tmap_mode("plot")
+
+le_a
+
+```
+
+### 8. Multiple maps
+
+Multiple maps allow us to compare indicators side by side.
+
+```{r}
+#| warning: false
+#| message: false
+
+tm_shape(World) +
+  tm_polygons(
+    fill = c("well_being", "life_exp"),
+    fill.legend = tm_legend("")
+  ) +
+  tm_layout(
+    panel.labels = c("A. Well-being", "B. Life Expectancy")
+  )
+
+```
+
+This helps us compare whether countries with high life expectancy also show high well-being.
+
+```{r}
+#| warning: false
+#| message: false
+
+tm_shape(World) +
+  tm_polygons(
+    fill = c("well_being", "life_exp", "pop_est", "economy")
+  )
+
+```
+
+This helps us compare whether countries with high life expectancy also show high well-being ,population estimation, Economy.
+
+### 9. Faceted Maps
+
+In many demographic studies, we are interested not only in the overall spatial pattern but also in how patterns differ across regions. One useful approach is **faceting**, which creates multiple maps using the same variable while dividing the data into meaningful groups.
+
+In this example, we use municipality-level data from the Netherlands and create separate maps for each province.
+
+The `NLD_muni` dataset contains municipality boundaries and several socioeconomic indicators.
+
+```{r}
+#| warning: false
+#| message: false
+
+data(NLD_muni, package = "tmap") 
+
+names(NLD_muni)
+  
+
+```
+
+First, we create a single choropleth map showing employment rates across all municipalities.
+
+The `NLD_muni` dataset contains municipality boundaries and several socioeconomic indicators.
+
+```{r}
+#| warning: false
+#| message: false
+
+tm_shape(NLD_muni) +
+  tm_polygons(fill = "employment_rate")
+
+```
+
+This map shows the national spatial distribution of employment rates.
+
+We now split the map by province using `tm_facets()`.
+
+```{r}
+#| warning: false
+#| message: false
+
+tm_shape(NLD_muni) +
+  tm_polygons(fill = "employment_rate") +
+  tm_facets(by = "province")
+
+```
+
+The argument `by = "province"` tells tmap to create a separate map for each province.
+
+Instead of displaying one large national map, the output contains multiple smaller maps arranged in panels.
+
+## Practice Exercise
+
+### Exercise 1. Comparing Population Age Structure
+
+Create a set of maps showing the spatial distribution of the following age groups across Dutch municipalities:
+
+-   Population aged 0–14 years
+
+-   Population aged 15–24 years
+
+-   Population aged 25–44 years
+
+-   Population aged 65 years and over
+
+### Exercise 2. Faceted Maps by Province
+
+Each student will select one indicator and create a faceted map by province.
+
+Available indicators:
+
+-   Student 1: Employment Rate
+
+-   Student 2: Population Aged 0–14 Years
+
+-   Student 3: Population Aged 25–44 Years
+
+-   Student 4: Population Aged 65 Years and Over
+
+-   Student 5: Urbanity
