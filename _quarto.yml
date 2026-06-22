@@ -9,8 +9,8 @@ website:
       - href: index.qmd
         text: Home
       - href: lectures/week01_population_pyramid.qmd
-        text: Week1
+        text: Week_1
       - href: lectures/week02_mortality_fertility.qmd
-        text: Week2
+        text: Week_2
       - href: lectures/week03_migration.qmd
-        text: Week3
+        text: Week_3
