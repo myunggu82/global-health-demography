@@ -89,7 +89,6 @@ d2 <- d2 %>%
 
 d2
 
-
 # 5. Create output folder -------------------------------------------------
 
 dir.create("./figure", showWarnings = FALSE)
