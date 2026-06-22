@@ -44,7 +44,7 @@ The \`tmap\` package has two main modes.\
 
 tmap_mode("plot")
 tmap_mode("view")
-
+tmap_mode("plot")
 ```
 
 ### 3. Load example spatial data

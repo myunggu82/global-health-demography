@@ -1,55 +1,40 @@
-# ============================================================
-# Spatial Demography Practice 1
-# Basic Mapping with tmap
-# ============================================================
 
-# 0. Load package ---------------------------------------------------------
+# 1. Install and Load packages
 
 library(tmap)
 
-# tmap warning such as:
-# "package 'tmap' was built under R version ..."
-# is usually not a problem if the package loads successfully.
+# 2. Set tmap mode
 
-
-# 1. Set tmap mode --------------------------------------------------------
-
-# plot mode = static map for slides, reports, and papers
 tmap_mode("plot")
-
-# view mode = interactive map using leaflet
-# tmap_mode("view")
+tmap_mode("view")
 
 
-# 2. Load example spatial data -------------------------------------------
+# 3. Load example spatial data
 
-# World is an example sf object included in the tmap package
 data(World, package = "tmap")
 
 # Check available variables
 names(World)
 
+# 4. Basic map
 
-# 3. Basic choropleth map -------------------------------------------------
-
-# HPI = Happy Planet Index
 tm_shape(World) +
   tm_polygons(fill = "HPI")
 
+# Here, countries are coloured by the Happy Planet Index.
 
-# 4. Choropleth map with colour palette ----------------------------------
+# 5. Basic map with colour palette
 
 tm_shape(World) +
   tm_polygons(
-    fill = "life_exp",                                    # variable to map
-    fill.scale = tm_scale_continuous(values = "YlGnBu"),  # continuous colour scale
+    fill = "life_exp",
+    fill.scale = tm_scale_continuous(values = "viridis"),
     fill.legend = tm_legend(
-      title = "Life Expectancy",                          # legend title
-      orientation = "landscape",                          # horizontal legend
-      frame = FALSE                                       # remove legend box
+      title = "Life Expectancy",
+      orientation = "landscape",
+      frame = FALSE
     )
   )
-
 
 # Common palettes:
 # "YlGn", "YlGnBu", "GnBu", "BuGn", "PuBu", "PuBuGn", "BuPu"
@@ -58,10 +43,9 @@ tm_shape(World) +
 # "viridis", "plasma", "magma", "inferno", "cividis"
 
 
-# 5. Map with fixed class intervals --------------------------------------
+# 6. Map with fixed class intervals
 
-# Here life expectancy is divided into fixed groups:
-# 0-60, 60-70, 70-80, 80-90
+# Here, life expectancy is divided into fixed groups: 0–60, 60–70, 70–80, and 80–90 years
 
 le <- tm_shape(World) +
   tm_polygons(
@@ -69,7 +53,7 @@ le <- tm_shape(World) +
     fill.scale = tm_scale_intervals(
       style = "fixed",
       breaks = c(0, 60, 70, 80, 90),
-      values = "YlGnBu"
+      values = "brewer.yl_gn_bu"
     ),
     fill.legend = tm_legend(
       title = "Life Expectancy",
@@ -81,20 +65,17 @@ le <- tm_shape(World) +
 le
 
 
-# 6. Add transparency -----------------------------------------------------
+# 7. Add transparency
 
-# fill_alpha controls transparency.
-# 1.0 = fully opaque
-# 0.4 = semi-transparent
-# 0.0 = fully transparent
-
+# Transparency can be controlled using `fill_alpha`.
+# `fill_alpha = 1.0` is fully opaque, while `fill_alpha = 0.0` is fully transparent.
 
 le_a <- tm_shape(World) +
   tm_polygons(
     fill = "life_exp",
     fill_alpha = 0.5,
     fill.scale = tm_scale_intervals(
-      breaks = c(0,60,70,80,90),
+      breaks = c(0, 60, 70, 80, 90),
       values = "brewer.yl_gn_bu"
     ),
     fill.legend = tm_legend(
@@ -104,25 +85,22 @@ le_a <- tm_shape(World) +
 
 le_a
 
+# 8. Interactive map
 
-  
-
-# 7. Interactive map ------------------------------------------------------
-
-# Change to interactive mode
 tmap_mode("view")
 
 le_a
 
-# Return to static plot mode
 tmap_mode("plot")
 
 le_a
 
 
-# 8. Small multiple maps --------------------------------------------------
+# 8. Multiple maps
 
-# Compare two indicators side by side
+# Multiple maps allow us to compare indicators side by side.
+
+
 tm_shape(World) +
   tm_polygons(
     fill = c("well_being", "life_exp"),
@@ -132,50 +110,83 @@ tm_shape(World) +
     panel.labels = c("A. Well-being", "B. Life Expectancy")
   )
 
-
-# Compare four variables at once
 tm_shape(World) +
   tm_polygons(
     fill = c("well_being", "life_exp", "pop_est", "economy")
   )
 
 
-# ============================================================
-# Practice 2
-# Netherlands municipal data
-# ============================================================
+tm_shape(World) +
+  tm_polygons(
+    fill = c("well_being", "life_exp", "pop_est", "economy")
+  )
 
-# 9. Load Netherlands municipality data ----------------------------------
+# 9. Faceted Maps
 
-data(NLD_muni, package = "tmap")
+
+data(NLD_muni, package = "tmap") 
 
 names(NLD_muni)
 
 
-# 10. Map employment rate -------------------------------------------------
-
-tm_shape(NLD_muni) +
-  tm_polygons(fill = "employment_rate")
+tm_shape(NLD_muni) 
++ tm_polygons(fill = "employment_rate")
 
 
-# 11. Faceted map by province --------------------------------------------
+# This map shows the national spatial distribution of employment rates.
+# We now split the map by province using tm_facets().
 
-# tm_facets() creates maps separately by group.
-# Here, one map is created for each province.
 
 tm_shape(NLD_muni) +
   tm_polygons(fill = "employment_rate") +
   tm_facets(by = "province")
 
-
-# 12. Compare age composition --------------------------------------------
-
-# fill.free = FALSE makes all panels use the same colour scale.
-# This is important when comparing maps.
-
+############# practice
 tm_shape(NLD_muni) +
   tm_polygons(
-    fill = c("pop_0_14", "pop_25_44", "pop_65plus"),
+    fill = c("pop_0_14", "pop_15_24" , "pop_25_44", "pop_65plus"),
+    fill.scale = tm_scale_continuous(values = "viridis"),
     fill.legend = tm_legend("Percentage"),
     fill.free = FALSE
   )
+
+# Student 1: Employment rate
+tm_shape(NLD_muni) +
+  tm_polygons(
+    fill = "employment_rate",
+    fill.scale = tm_scale_continuous(values = "viridis")
+  ) +
+  tm_facets(by = "province")
+
+# Student 2: Population aged 0–14
+tm_shape(NLD_muni) +
+  tm_polygons(
+    fill = "pop_0_14",
+    fill.scale = tm_scale_continuous(values = "viridis")
+  ) +
+  tm_facets(by = "province")
+
+# Student 3: Population aged 25–44
+tm_shape(NLD_muni) +
+  tm_polygons(
+    fill = "pop_25_44",
+    fill.scale = tm_scale_continuous(values = "viridis")
+  ) +
+  tm_facets(by = "province")
+
+# Student 4: Population aged 65+
+tm_shape(NLD_muni) +
+  tm_polygons(
+    fill = "pop_65plus",
+    fill.scale = tm_scale_continuous(values = "viridis")
+  ) +
+  tm_facets(by = "province")
+
+
+# Student 5: Urbanity
+tm_shape(NLD_muni) +
+  tm_polygons(
+    fill = "urbanity",
+    fill.scale = tm_scale_continuous(values = "viridis")
+  ) +
+  tm_facets(by = "province")
