@@ -57,7 +57,7 @@ data(mx5dt)
 data(popAge1dt)
 ```
 
-### 4.  Age-specific mortality and population (Japan vs Uganda, 2018)
+### 4. Age-specific mortality and population (Japan vs Uganda, 2018)
 
 This section compares mortality between Japan and Uganda using age-specific mortality rates and population data.
 
@@ -101,7 +101,7 @@ uga_cdr <- uga_pop %>%
 
 The crude death rate shows the number of deaths per 1,000 population without adjusting for age structure.
 
-### 5.  Direct age standardization
+### 5. Direct age standardization
 
 ```{r}
 #| warning: false
@@ -141,7 +141,7 @@ mortality_result
 
 ```
 
-### 6.  Survivorship curves: Republic of Korea, 1953 vs 2018
+### 6. Survivorship curves: Republic of Korea, 1953 vs 2018
 
 We first need to create time tables and the use lx to create survivoership curves. Survivorship curves show how many people remain alive at each age out of 100,000 births.
 
@@ -204,10 +204,9 @@ ggplot(
   theme_classic()
 ```
 
-### 6.  Fertility Transition in Korea
+### 6. Fertility Transition in Korea
 
-This section examines changes in age-specific fertility rates in the Republic of Korea.
-The results show how fertility shifted from a broad and high-fertility pattern to a delayed and low-fertility pattern.
+This section examines changes in age-specific fertility rates in the Republic of Korea. The results show how fertility shifted from a broad and high-fertility pattern to a delayed and low-fertility pattern.
 
 ```{r}
 #| warning: false
